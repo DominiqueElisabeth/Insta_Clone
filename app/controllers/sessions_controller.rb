@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :login_required, only: [:new, :create]
+  before_action :login_required, only: [:new, :create, :destroy]
 
   def new
   end
@@ -11,11 +11,12 @@ class SessionsController < ApplicationController
     else
       flash.now[:danger] = 'Login failed'
       render :new
+    end
   end
-  end
+
   def destroy
      session.delete(:user_id)
-     flash[:notice] = 'Logged out'
+     flash[:notice] = 'Sign out'
      redirect_to new_session_path
   end
 end
