@@ -14,13 +14,14 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.new(user_params)
-      if @user.save
-      redirect_to user_path(@user.id)
-      else
-        render :new
-      end
-  end
+     @user = User.new(user_params)
+     if  @user.save
+       @user.authenticate(user_params)
+       redirect_to user_path(@user.id)
+     else
+       render :new
+     end
+   end
 
   def update
   respond_to do |format|
@@ -48,7 +49,6 @@ end
   end
 
     def user_params
-      params.require(:user).permit(:image, :image_cache, :name, :email, :password, :password_confirmation)
-
+      params.require(:user).permit( :name, :email, :password, :password_confirmation, :image, :image_cache)
     end
   end

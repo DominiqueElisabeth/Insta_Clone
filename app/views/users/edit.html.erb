@@ -1,6 +1,10 @@
-<h1>Editing User</h1>
-
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= form_with(model: @user, local: true) do |form| %>
+<h1><%= @user.name %>'s page</h1>
+<p>Email address: <%= @user.email %></p>
+<%= form.file_field :image %>
+<%= form.hidden_field :image_cache %>
+<%# form.hidden_field :password, value: @user.password_digest %>
+<%# form.hidden_field :password_confirmation, value: @user.password_digest %>
+<%= form.submit "Upload image" %>
+<% end %>
+<%= link_to 'Back', user_path %>

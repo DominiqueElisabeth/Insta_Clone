@@ -1,6 +1,5 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
-  before_action :user_login_check, only: [:new]
+  before_action :set_picture, only: [:show, :edit, :update, :destroy], raise: false
 
   def index
     @pictures = Picture.all
@@ -10,12 +9,12 @@ class PicturesController < ApplicationController
   end
 
   def new
-    if params[:back]
-      @picture = Picture.new(picture_params)
-    else
-      @picture = Picture.new
-    end
-  end
+     if params[:back]
+       @picture = Picture.new(picture_params)
+     else
+       @picture = Picture.new
+     end
+   end
 
   def edit
   end
@@ -37,8 +36,7 @@ class PicturesController < ApplicationController
     @picture = current_user.pictures.build(picture_params)
     render :new if @picture.invalid?
   end
-  # PATCH/PUT /pictures/1
-  # PATCH/PUT /pictures/1.json
+
   def update
     respond_to do |format|
       if @picture.update(picture_params)
@@ -66,10 +64,4 @@ class PicturesController < ApplicationController
     def picture_params
       params.require(:picture).permit(:content, :image, :image_cache)
     end
-
-    def user_login_check
-   unless logged_in?
-     redirect_to root_path
-   end
- end
-end
+  end
