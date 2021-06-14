@@ -15,22 +15,27 @@ class PicturesController < ApplicationController
       @picture = Picture.new
    end
 
-  def edit
-  end
+   def edit
+       if @picture.user != current_user
+         flash.now[:error] = 'unauthorized access!'
+         redirect_to pictures_path
+       else
+     end
+   end
 
-  def create
-    @picture = Picture.new(picture_params)
-    @picture.user_id = current_user.id
-    if params[:back]
-      render :new
-    else
-      if @picture.save
-        redirect_to @picture, notice: 'Picture was posted'
-      else
-        render :new
-      end
-    end
-  end
+    def create
+     @picture = current_user.pictures.build(picture_params)
+        if params[:back]
+          render :new
+        else
+          if @picture.save
+             PictureMailer.picture_mail(@picture).deliver
+            redirect_to pictures_path, notice: "I posted a picture！"
+          else
+            render :new
+          end
+        end
+     end
 
   def confirm
     @picture = current_user.pictures.build(picture_params)
