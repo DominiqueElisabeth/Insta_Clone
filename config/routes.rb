@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "users#index"
   get 'users/index'
   get 'users/show'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -8,13 +9,11 @@ Rails.application.routes.draw do
   resources :pictures
   resources :favorites, only: [:create, :destroy, :index]
 
-  if Rails.env.development?
-  mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
-
   resources :pictures do
     collection do
     post :confirm
     end
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
