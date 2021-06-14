@@ -32,6 +32,10 @@ end
 group :development do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  gem 'annotate'
+  gem 'letter_opener_web'
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :development do

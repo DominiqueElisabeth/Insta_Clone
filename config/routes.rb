@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   resources :pictures
   resources :favorites, only: [:create, :destroy, :index]
 
+  if Rails.env.development?
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+  
   resources :pictures do
     collection do
     post :confirm
-  end
+    end
   end
 end
