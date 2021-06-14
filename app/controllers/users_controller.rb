@@ -5,6 +5,10 @@ class UsersController < ApplicationController
        @user = User.find(params[:id])
   end
 
+  def favorites
+    @user = User.find (params [:id])
+end
+
   def index
     @users = User.all
   end
@@ -44,6 +48,7 @@ def destroy
 end
 
   private
+  # Only allow a list of trusted parameters through.
     def set_user
      @user = User.find(params[:id])
   end
