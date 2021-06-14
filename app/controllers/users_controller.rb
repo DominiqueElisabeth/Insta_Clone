@@ -1,13 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :login_required, only: [:new, :create]
 
   def show
        @user = User.find(params[:id])
-  end
-
-  def favorites
-    @user = User.find (params [:id])
-end
+     end
 
   def index
     @users = User.all
@@ -18,14 +14,13 @@ end
   end
 
   def create
-     @user = User.new(user_params)
-     if  @user.save
-       @user.authenticate(user_params)
-       redirect_to user_path(@user.id)
-     else
-       render :new
-     end
-   end
+      @user = User.new(user_params)
+      if @user.save
+      redirect_to user_path(@user.id)
+      else
+        render :new
+      end
+  end
 
   def update
   respond_to do |format|
@@ -54,6 +49,6 @@ end
   end
 
     def user_params
-      params.require(:user).permit( :name, :email, :password, :password_confirmation, :image, :image_cache)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :image, :image_cache)
     end
   end

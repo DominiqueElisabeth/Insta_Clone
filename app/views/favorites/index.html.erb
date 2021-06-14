@@ -1,28 +1,22 @@
-<h1>Favorites</h1>
-
-  <% @favorites.each do |favorite| %>
-      <div class ="favorite_index">
-        <table>
-          <tr>
-            <td>
-            <%= link_to picture_path(favorite) do%>
-              <%= image_tag(favorite.image.url) if favorite.image.present? %>
-            <% end %>
-            </td>
-          <br>
-          <tr>
-            <td>
-              <p><%= favorite.message %></p>
-            </td>
-          </tr>
-          <br>
-          <tr>
-            <td>
-              <p><%= favorite.user.name %>が<%= favorite.updated_at %>に投稿</p>
-            </td>
-          </tr>
-        </table>
-      </div>
-  <% end %>
+<h1><%= current_user.name %> favorites list</h1>
+<br>
+<table class="container">
+  <thead>
+    <tr class="row">
+      <th class="col-md-4">user</th>
+      <th class="col-md-4">image</th>
+      <th class="col-md-4">Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr class="row">
+        <td class="col-md-4"><%= favorite.picture.user.name %></td>
+        <td class="col-md-4"><%= image_tag favorite.picture.image.url %></td>
+        <td class="col-md-4"><%= favorite.picture.content %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
   <%= link_to 'Back', pictures_path %>

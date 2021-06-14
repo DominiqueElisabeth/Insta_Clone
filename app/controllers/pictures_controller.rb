@@ -7,21 +7,20 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def new
-    if params[:back]
-      @picture = Picture.new(picture_params)
-    else
+
       @picture = Picture.new
-    end
-  end
+   end
 
   def edit
   end
 
   def create
-    @picture = current_user.pictures.build(picture_params)
+    @picture = Picture.new(picture_params)
+    @picture.user_id = current_user.id
     if params[:back]
       render :new
     else
@@ -64,7 +63,7 @@ class PicturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def picture_params
-      params.require(:picture).permit(:content, :image, :image_cache)
+      params.require(:picture).permit(:image, :content, :image_cache, :user_id, :email)
     end
 
     def user_login_check
