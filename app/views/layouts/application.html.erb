@@ -7,23 +7,17 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <ul class="menu">
-    <li>
-    <a href="#home">Home</a>
-    </li>
-    <li>
-    <a href="/pictures">show</a>
-    </li>
-    <li>
-    <a href="#">Profile</a>
-    </li>
-    <li>
-    <a href="">Log In</a>
-    </li>
-    <li>
-    <a href="#new_user_path">Sign Up</a>
-    </li>
-  </ul>
+
+<nav class="navbar navbar-expand-sm bg-danger navbar-dark">
+<a class="navbar-brand" href="#">
+
+<div class="style"><font size="14" color="blue">Instagram Clone</font></div></a>
+<header>
+    <div>
+      <h1 class="Insta">Share your moments with the world ♬</h1>
+   </div>
+  </header>
+</nav>
 
   <body>
     <% flash.each do |key, value| %>

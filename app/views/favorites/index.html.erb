@@ -1,22 +1,18 @@
-<h1><%= current_user.name %> favorites list</h1>
-<br>
-<table class="container">
-  <thead>
-    <tr class="row">
-      <th class="col-md-4">user</th>
-      <th class="col-md-4">image</th>
-      <th class="col-md-4">Content</th>
-    </tr>
-  </thead>
-  <tbody>
+<h1>Favorites list</h1>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Content</th>
+    <th>Picture</th>
+  </tr>
+  <tr>
     <% @favorites.each do |favorite| %>
-      <tr class="row">
-        <td class="col-md-4"><%= favorite.picture.user.name %></td>
-        <td class="col-md-4"><%= image_tag favorite.picture.image.url %></td>
-        <td class="col-md-4"><%= favorite.picture.content %></td>
-      </tr>
-    <% end %>
-  </tbody>
+    <td><%= favorite.picture.user.name %></td>
+    <td><%= favorite.picture.content %></td>
+    <td><%= image_tag favorite.picture.image.url %></td>
+  </tr>
+<% end %>
 </table>
 
   <%= link_to 'Back', pictures_path %>
